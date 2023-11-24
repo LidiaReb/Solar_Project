@@ -68,7 +68,7 @@ def parse_planet_parameters(line, planet):
     **line** — строка с описание планеты.
     **planet** — объект планеты.
     """
-    planet.type = "planet"
+    planet.type = "star"
     r, color, m, x, y, vx, vy = line.split()[1:]
     planet.R = int(r)
     planet.color = color
@@ -88,11 +88,17 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     **output_filename** — имя входного файла
     **space_objects** — список объектов планет и звёзд
     """
+
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            out_file.write(obj.type) , obj.r, obj.color, obj.m,
-                  obj.x, obj.y, obj.Vx, obj.Vy)
-        
+            if obj.type == 'star':
+                s = 'Star '
+            elif obj.type == 'planet':
+                s = 'Planet'
+            s += str(obj.R) + ' ' + str(obj.color) + ' ' + str(obj.m) + ' ' + str(obj.x) + ' '
+            s += str(obj.y) + ' ' + str(obj.Vx) + ' ' + str(obj.Vy) + '\n' + '\n'
+            out_file.write(s)
+
 
 if __name__ == "__main__":
     print("This module is not for direct call!")
