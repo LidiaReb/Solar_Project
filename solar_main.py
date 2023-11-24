@@ -114,11 +114,14 @@ def main():
 
     print('Modelling started!')
     physical_time = 0
-
     root = tkinter.Tk()
     # космическое пространство отображается на холсте типа Canvas
-    space = tkinter.Canvas(root, width=window_width, height=window_height, bg="black")
-    space.pack(side=tkinter.TOP)
+    from PIL import ImageTk, Image
+    img = Image.open("./stars.png")
+    image = ImageTk.PhotoImage(img)
+    space = tkinter.Canvas(root, width=window_width, height=window_height)
+    space.pack(side="top", fill="both", expand="no")
+    space.create_image(0, 0, anchor="nw", image = image)
     # нижняя панель с кнопками
     frame = tkinter.Frame(root)
     frame.pack(side=tkinter.BOTTOM)
